@@ -36,12 +36,23 @@ https://ahihi.x10.mx/chk?user=4154644401584181|02|2027|555&key=khang
 3. Deploy tự động sẽ được thực hiện
 
 ## Files cần thiết
-- `chk.php`: File API chính
+- `api/chk.php`: File API chính (trong thư mục api)
 - `.htaccess`: Cấu hình URL rewriting
 - `vercel.json`: Cấu hình cho Vercel
 - `README.md`: Hướng dẫn sử dụng
 
+## Cấu trúc thư mục
+```
+/
+├── api/
+│   └── chk.php
+├── .htaccess
+├── vercel.json
+└── README.md
+```
+
 ## Lưu ý
 - API này sử dụng cURL để gọi đến chkr.cc
 - Headers được cấu hình giống như request gốc
-- Có xử lý lỗi và validation đầy đủ 
+- Có xử lý lỗi và validation đầy đủ
+- File PHP phải nằm trong thư mục `api/` để tương thích với Vercel 

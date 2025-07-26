@@ -5,8 +5,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
-# Chuyển hướng từ /chk thành /chk.php
-RewriteRule ^chk$ chk.php [L]
+# Chuyển hướng từ /chk thành /api/chk.php
+RewriteRule ^chk$ api/chk.php [L]
 
 # Ẩn thông tin thư mục
 Options -Indexes

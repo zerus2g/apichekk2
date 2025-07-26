@@ -1,13 +1,13 @@
 {
   "functions": {
-    "chk.php": {
+    "api/chk.php": {
       "runtime": "now-php@1.0.0"
     }
   },
   "rewrites": [
     {
       "source": "/chk",
-      "destination": "/chk.php"
+      "destination": "/api/chk.php"
     }
   ],
   "headers": [
