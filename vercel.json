@@ -23,5 +23,10 @@
         }
       ]
     }
-  ]
+  ],
+  "functions": {
+    "api/chk.php": {
+      "maxDuration": 30
+    }
+  }
 } 
