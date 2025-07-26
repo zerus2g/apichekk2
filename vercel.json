@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/chk",
-      "destination": "/api/chk.php"
+      "destination": "/api/chk.js"
     },
     {
       "source": "/api",
-      "destination": "/api/index.php"
+      "destination": "/api/index.js"
     }
   ]
 } 

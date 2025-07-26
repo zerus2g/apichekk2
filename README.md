@@ -1,6 +1,6 @@
-# API Proxy cho chkr.cc
+# API Proxy cho chkr.cc (Node.js)
 
-Đây là API proxy PHP để kiểm tra thẻ tín dụng thông qua chkr.cc
+Đây là API proxy Node.js để kiểm tra thẻ tín dụng thông qua chkr.cc
 
 ## Cách sử dụng
 
@@ -11,7 +11,7 @@ https://your-domain.vercel.app/chk?user=CARD_DATA&key=API_KEY
 
 ### Ví dụ
 ```
-https://ahihi.x10.mx/chk?user=4154644401584181|02|2027|555&key=khang
+https://apichekk2-n195.vercel.app/chk?user=4154644401584181|02|2027|555&key=khang
 ```
 
 ### Tham số
@@ -36,23 +36,30 @@ https://ahihi.x10.mx/chk?user=4154644401584181|02|2027|555&key=khang
 3. Deploy tự động sẽ được thực hiện
 
 ## Files cần thiết
-- `api/chk.php`: File API chính (trong thư mục api)
-- `.htaccess`: Cấu hình URL rewriting
+- `api/chk.js`: File API chính (Node.js)
+- `api/index.js`: File test API
 - `vercel.json`: Cấu hình cho Vercel
+- `package.json`: Cấu hình Node.js project
+- `index.html`: Trang chủ
+- `test.html`: Trang test API
 - `README.md`: Hướng dẫn sử dụng
 
 ## Cấu trúc thư mục
 ```
 /
 ├── api/
-│   └── chk.php
-├── .htaccess
+│   ├── chk.js
+│   └── index.js
 ├── vercel.json
+├── package.json
+├── index.html
+├── test.html
 └── README.md
 ```
 
 ## Lưu ý
-- API này sử dụng cURL để gọi đến chkr.cc
+- API này sử dụng Node.js để gọi đến chkr.cc
 - Headers được cấu hình giống như request gốc
 - Có xử lý lỗi và validation đầy đủ
-- File PHP phải nằm trong thư mục `api/` để tương thích với Vercel 
+- Tương thích hoàn toàn với Vercel
+- Hỗ trợ CORS cho frontend 
