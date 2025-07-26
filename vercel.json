@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "api/chk.php": {
-      "runtime": "@vercel/php@1.0.0"
-    }
-  },
   "rewrites": [
     {
       "source": "/chk",
