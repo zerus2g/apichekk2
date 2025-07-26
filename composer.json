@@ -1,0 +1,16 @@
+{
+  "name": "apichekk2",
+  "description": "API Proxy cho chkr.cc",
+  "type": "project",
+  "require": {
+    "php": ">=7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "scripts": {
+    "test": "php -l api/chk.php"
+  }
+} 

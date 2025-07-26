@@ -3,6 +3,10 @@
     {
       "source": "/chk",
       "destination": "/api/chk.php"
+    },
+    {
+      "source": "/api",
+      "destination": "/api/index.php"
     }
   ],
   "headers": [
@@ -23,10 +27,5 @@
         }
       ]
     }
-  ],
-  "functions": {
-    "api/chk.php": {
-      "maxDuration": 30
-    }
-  }
+  ]
 } 
