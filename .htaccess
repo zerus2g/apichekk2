@@ -1,0 +1,29 @@
+RewriteEngine On
+
+# Ẩn đuôi file .php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Chuyển hướng từ /chk thành /chk.php
+RewriteRule ^chk$ chk.php [L]
+
+# Ẩn thông tin thư mục
+Options -Indexes
+
+# Bảo mật - ẩn thông tin server
+ServerTokens Prod
+ServerSignature Off
+
+# Bảo vệ file .htaccess
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Bảo vệ file PHP khác
+<Files "*.php">
+    <RequireAll>
+        Require all granted
+    </RequireAll>
+</Files> 
