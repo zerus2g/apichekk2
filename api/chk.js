@@ -16,7 +16,7 @@ export default async function handler(req, res) {
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
 
   const requiredApiKey = 'khang';
-  const targetUrl = 'https://api.chkr.cc/';
+  const targetUrl = 'https://uncoder.eu.org/cc-checker/api.php';
 
   // Check required parameters
   const { key, user } = req.query;
@@ -45,56 +45,49 @@ export default async function handler(req, res) {
     });
   }
 
-  // Prepare headers
+  // Prepare headers for uncoder.eu.org
   const headers = {
-    'accept': 'application/json, text/javascript, */*; q=0.01',
-    'accept-language': 'vi,en-US;q=0.9,en;q=0.8,fr-FR;q=0.7,fr;q=0.6',
-    'content-type': 'application/json; charset=UTF-8',
-    'origin': 'https://chkr.cc',
+    'accept': '*/*',
+    'accept-language': 'en-US,en;q=0.9,vi;q=0.8',
+    'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    'origin': 'https://uncoder.eu.org',
     'priority': 'u=1, i',
-    'referer': 'https://chkr.cc/',
-    'sec-ch-ua': '"Google Chrome";v="137", "Chromium";v="137", "Not/A)Brand";v="24"',
-    'sec-ch-ua-mobile': '?0',
-    'sec-ch-ua-platform': '"Windows"',
+    'referer': 'https://uncoder.eu.org/cc-checker/',
     'sec-fetch-dest': 'empty',
     'sec-fetch-mode': 'cors',
-    'sec-fetch-site': 'same-site',
-    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'
+    'sec-fetch-site': 'same-origin',
+    'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1',
+    'x-requested-with': 'XMLHttpRequest'
   };
 
-  // Prepare JSON data
-  const jsonData = {
-    data: cardData,
-    charge: false
-  };
+  // Prepare form data
+  const formData = `data=${encodeURIComponent(cardData)}`;
 
-  // Make request to chkr.cc
+  // Make request to uncoder.eu.org
   try {
-    const response = await makeRequest(targetUrl, jsonData, headers);
+    const response = await makeRequest(targetUrl, formData, headers);
     res.status(200).json(response);
   } catch (error) {
     console.error('API Error:', error);
     res.status(500).json({
       status: 'error',
-      message: 'Lỗi khi kết nối đến API chkr.cc',
+      message: 'Lỗi khi kết nối đến API uncoder.eu.org',
       error_details: error.message,
-      suggestion: 'Có thể server chkr.cc đang bảo trì hoặc quá tải. Vui lòng thử lại sau.'
+      suggestion: 'Có thể server uncoder.eu.org đang bảo trì hoặc quá tải. Vui lòng thử lại sau.'
     });
   }
 }
 
-function makeRequest(url, data, headers) {
+function makeRequest(url, formData, headers) {
   return new Promise((resolve, reject) => {
-    const postData = JSON.stringify(data);
-    
     const options = {
-      hostname: 'api.chkr.cc',
+      hostname: 'uncoder.eu.org',
       port: 443,
-      path: '/',
+      path: '/cc-checker/api.php',
       method: 'POST',
       headers: {
         ...headers,
-        'Content-Length': Buffer.byteLength(postData)
+        'Content-Length': Buffer.byteLength(formData)
       },
       timeout: 30000, // 30 seconds timeout
       keepAlive: true,
@@ -114,7 +107,7 @@ function makeRequest(url, data, headers) {
           if (responseData.trim() === '') {
             resolve({
               status: 'error',
-              message: 'API chkr.cc trả về response rỗng',
+              message: 'API uncoder.eu.org trả về response rỗng',
               http_code: res.statusCode
             });
             return;
@@ -126,7 +119,7 @@ function makeRequest(url, data, headers) {
           // If not JSON, return raw response for debugging
           resolve({
             status: 'error',
-            message: 'Không thể giải mã phản hồi JSON từ API chkr.cc',
+            message: 'Không thể giải mã phản hồi JSON từ API uncoder.eu.org',
             http_code: res.statusCode,
             raw_response: responseData,
             error: error.message
@@ -142,10 +135,10 @@ function makeRequest(url, data, headers) {
 
     req.on('timeout', () => {
       req.destroy();
-      reject(new Error('Request timeout - server chkr.cc không phản hồi trong 30 giây'));
+      reject(new Error('Request timeout - server uncoder.eu.org không phản hồi trong 30 giây'));
     });
 
-    req.write(postData);
+    req.write(formData);
     req.end();
   });
 } 

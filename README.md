@@ -1,6 +1,6 @@
-# API Proxy cho chkr.cc (Node.js)
+# API Proxy cho uncoder.eu.org (Node.js)
 
-Đây là API proxy Node.js để kiểm tra thẻ tín dụng thông qua chkr.cc
+Đây là API proxy Node.js để kiểm tra thẻ tín dụng thông qua uncoder.eu.org
 
 ## Cách sử dụng
 
@@ -11,7 +11,7 @@ https://your-domain.vercel.app/chk?user=CARD_DATA&key=API_KEY
 
 ### Ví dụ
 ```
-https://apichekk2-n195.vercel.app/chk?user=4154644401584181|02|2027|555&key=khang
+https://apichekk2-dsp6.vercel.app/chk?user=4154644401538872|03|2027|076&key=khang
 ```
 
 ### Tham số
@@ -22,9 +22,9 @@ https://apichekk2-n195.vercel.app/chk?user=4154644401584181|02|2027|555&key=khan
 ```json
 {
   "status": "success",
-  "message": "Thông báo từ API chkr.cc",
+  "message": "Thông báo từ API uncoder.eu.org",
   "data": {
-    // Dữ liệu phản hồi từ chkr.cc
+    // Dữ liệu phản hồi từ uncoder.eu.org
   }
 }
 ```
@@ -38,6 +38,7 @@ https://apichekk2-n195.vercel.app/chk?user=4154644401584181|02|2027|555&key=khan
 ## Files cần thiết
 - `api/chk.js`: File API chính (Node.js)
 - `api/index.js`: File test API
+- `api/test.js`: File test kết nối
 - `vercel.json`: Cấu hình cho Vercel
 - `package.json`: Cấu hình Node.js project
 - `index.html`: Trang chủ
@@ -49,7 +50,8 @@ https://apichekk2-n195.vercel.app/chk?user=4154644401584181|02|2027|555&key=khan
 /
 ├── api/
 │   ├── chk.js
-│   └── index.js
+│   ├── index.js
+│   └── test.js
 ├── vercel.json
 ├── package.json
 ├── index.html
@@ -58,8 +60,9 @@ https://apichekk2-n195.vercel.app/chk?user=4154644401584181|02|2027|555&key=khan
 ```
 
 ## Lưu ý
-- API này sử dụng Node.js để gọi đến chkr.cc
+- API này sử dụng Node.js để gọi đến uncoder.eu.org
 - Headers được cấu hình giống như request gốc
 - Có xử lý lỗi và validation đầy đủ
 - Tương thích hoàn toàn với Vercel
-- Hỗ trợ CORS cho frontend 
+- Hỗ trợ CORS cho frontend
+- Sử dụng form data thay vì JSON 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test API chkr.cc</title>
+    <title>Test API uncoder.eu.org</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -58,11 +58,11 @@
     </style>
 </head>
 <body>
-    <h1>🧪 Test API chkr.cc (Node.js)</h1>
+    <h1>🧪 Test API uncoder.eu.org</h1>
     
     <div class="form-group">
         <label for="cardData">Dữ liệu thẻ (format: số_thẻ|tháng|năm|cvv):</label>
-        <input type="text" id="cardData" value="4154644401584181|02|2027|555" placeholder="4154644401584181|02|2027|555">
+        <input type="text" id="cardData" value="4154644401538872|03|2027|076" placeholder="4154644401538872|03|2027|076">
     </div>
     
     <div class="form-group">
@@ -85,7 +85,7 @@
                 return;
             }
             
-            const url = `https://apichekk2-n195.vercel.app/chk?user=${encodeURIComponent(cardData)}&key=${encodeURIComponent(apiKey)}`;
+            const url = `https://apichekk2-dsp6.vercel.app/chk?user=${encodeURIComponent(cardData)}&key=${encodeURIComponent(apiKey)}`;
             
             resultDiv.style.display = 'block';
             resultDiv.className = 'result';
