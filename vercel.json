@@ -4,14 +4,10 @@
       "runtime": "php"
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/chk",
-      "dest": "/chk.php"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "source": "/chk",
+      "destination": "/chk.php"
     }
   ],
   "headers": [
