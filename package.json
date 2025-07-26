@@ -1,0 +1,12 @@
+{
+  "name": "apichekk2",
+  "version": "1.0.0",
+  "description": "API Proxy cho chkr.cc",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["api", "php", "proxy"],
+  "author": "",
+  "license": "ISC"
+} 
