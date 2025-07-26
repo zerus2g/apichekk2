@@ -73,10 +73,12 @@ export default async function handler(req, res) {
     const response = await makeRequest(targetUrl, jsonData, headers);
     res.status(200).json(response);
   } catch (error) {
+    console.error('API Error:', error);
     res.status(500).json({
       status: 'error',
       message: 'Lỗi khi kết nối đến API chkr.cc',
-      error_details: error.message
+      error_details: error.message,
+      suggestion: 'Có thể server chkr.cc đang bảo trì hoặc quá tải. Vui lòng thử lại sau.'
     });
   }
 }
@@ -93,7 +95,10 @@ function makeRequest(url, data, headers) {
       headers: {
         ...headers,
         'Content-Length': Buffer.byteLength(postData)
-      }
+      },
+      timeout: 30000, // 30 seconds timeout
+      keepAlive: true,
+      keepAliveMsecs: 1000
     };
 
     const req = https.request(options, (res) => {
@@ -105,21 +110,39 @@ function makeRequest(url, data, headers) {
       
       res.on('end', () => {
         try {
+          // Check if response is valid JSON
+          if (responseData.trim() === '') {
+            resolve({
+              status: 'error',
+              message: 'API chkr.cc trả về response rỗng',
+              http_code: res.statusCode
+            });
+            return;
+          }
+
           const parsedData = JSON.parse(responseData);
           resolve(parsedData);
         } catch (error) {
+          // If not JSON, return raw response for debugging
           resolve({
             status: 'error',
             message: 'Không thể giải mã phản hồi JSON từ API chkr.cc',
             http_code: res.statusCode,
-            raw_response: responseData
+            raw_response: responseData,
+            error: error.message
           });
         }
       });
     });
 
     req.on('error', (error) => {
+      console.error('Request Error:', error);
       reject(error);
+    });
+
+    req.on('timeout', () => {
+      req.destroy();
+      reject(new Error('Request timeout - server chkr.cc không phản hồi trong 30 giây'));
     });
 
     req.write(postData);
